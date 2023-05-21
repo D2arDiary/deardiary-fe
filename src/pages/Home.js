@@ -55,9 +55,10 @@ const Home = () => {
   };
 
   const handleLogout = () => {
-    sessionStorage.removeItem("isLogin");
+    sessionStorage.clear();
     window.location.href = "/";
   };
+
   return (
     <div>
       <MyHeader

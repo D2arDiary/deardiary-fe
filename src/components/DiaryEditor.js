@@ -3,6 +3,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 
 import { DiaryDispatchContext } from "./../App.js";
 
+import axios from "axios";
 import MyHeader from "./MyHeader";
 import MyButton from "./MyButton";
 import EmotionItem from "./EmotionItem";
@@ -19,19 +20,37 @@ const DiaryEditor = ({ isEdit, originData }) => {
   const navigate = useNavigate();
 
   const { onCreate, onEdit, onRemove } = useContext(DiaryDispatchContext);
+  const userId = sessionStorage.getItem("userId");
 
   const handleClickEmote = (emotion) => {
     setEmotion(emotion);
   };
 
-  const handleRemove = () => {
+  const handleRemove = async () => {
     if (window.confirm("정말로 삭제하시겠습니까?")) {
       onRemove(originData.id);
+      const info = {
+        userId: userId,
+        contentId: originData.id,
+        content: content,
+        date: date,
+      };
+      console.log(info);
+      const createDiary = await axios
+        .post("http://192.168.0.195:38383/api/deleteDiary", info)
+        .then((response) => {
+          console.log(response.data);
+          // sessionStorage.setItem("localData", JSON.stringify(response.data));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
       navigate("/", { replace: true });
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (content.length < 1) {
       contentRef.current.focus();
       return;
@@ -44,7 +63,33 @@ const DiaryEditor = ({ isEdit, originData }) => {
     ) {
       if (!isEdit) {
         onCreate(date, content, emotion);
+        const info = { userId: userId, content: content, date: date };
+        const createDiary = await axios
+          .post("http://192.168.0.195:38383/api/postDiary", info)
+          .then((response) => {
+            console.log(response.data);
+            // sessionStorage.setItem("localData", JSON.stringify(response.data));
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       } else {
+        const info = {
+          userId: userId,
+          contentId: originData.id,
+          content: content,
+          date: date,
+        };
+        console.log(info);
+        const createDiary = await axios
+          .post("http://192.168.0.195:38383/api/editDiary", info)
+          .then((response) => {
+            console.log(response.data);
+            // sessionStorage.setItem("localData", JSON.stringify(response.data));
+          })
+          .catch((error) => {
+            console.error(error);
+          });
         onEdit(originData.id, date, content, emotion);
       }
     }
@@ -87,19 +132,7 @@ const DiaryEditor = ({ isEdit, originData }) => {
             />
           </div>
         </section>
-        {/* <section>
-          <h4>오늘의 감정</h4>
-          <div className="input_box emotion_list_wrapper">
-            {emotionList.map((it) => (
-              <EmotionItem
-                key={it.emotion_id}
-                {...it}
-                onClick={handleClickEmote}
-                isSelected={emotion === it.emotion_id}
-              />
-            ))}
-          </div>
-        </section> */}
+
         <section>
           <h4>오늘의 일기</h4>
           <div className="input_box text_wrapper">

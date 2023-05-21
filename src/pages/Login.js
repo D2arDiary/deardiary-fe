@@ -2,11 +2,18 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import MyButton from "../components/MyButton";
+import MyHeader from "../components/MyHeader";
 
 const Login = () => {
   const [inputId, setInputID] = useState("");
   const [inputPw, setInputPw] = useState("");
   const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   // navigate("/");
+  //   window.location.replace("/");
+  // }, [inputId]);
+
   const handleInputId = (e) => {
     setInputID(e.target.value);
     console.log("inputId :: ", inputId);
@@ -14,6 +21,10 @@ const Login = () => {
   const handleInputPw = (e) => {
     setInputPw(e.target.value);
     console.log("inputPw :: ", inputPw);
+  };
+
+  const onClickSignUp = () => {
+    navigate("/signup");
   };
 
   const onClickLogin = async () => {
@@ -33,9 +44,12 @@ const Login = () => {
         console.log(response.data);
         if (response.data.isLogin == "true") {
           sessionStorage.setItem("isLogin", "true");
+          sessionStorage.setItem("userId", inputId);
           window.location.href = "/";
         } else {
           sessionStorage.setItem("isLogin", "false");
+          sessionStorage.removeItem("isLogin");
+          sessionStorage.removeItem("userId");
           alert("아이디 또는 비밀번호가 틀렸습니다.");
         }
       })
@@ -46,26 +60,30 @@ const Login = () => {
   return (
     <div className="login_wrapper">
       <img className="login_logo" src="assets/logo.png" />
-      <div>
-        <input
-          className="id_field"
-          type="text"
-          placeholder="ID"
-          onChange={handleInputId}
-        />
+      <section>
+        <h2>ID</h2>
+        <div>
+          <input
+            className="id_field"
+            type="text"
+            placeholder="    ID"
+            onChange={handleInputId}
+          />
+        </div>
+        <h2>Password</h2>
+        <div>
+          <input
+            className="pw_field"
+            type="password"
+            placeholder="    Password"
+            onChange={handleInputPw}
+          />
+        </div>
+      </section>
+      <div className="form_wrapper">
+        <MyButton text={"로그인"} type={"positive"} onClick={onClickLogin} />
+        <MyButton text={"회원 가입 "} onClick={onClickSignUp} />
       </div>
-      <br></br>
-      <div>
-        <input
-          className="pw_field"
-          type="password"
-          placeholder="Password"
-          onChange={handleInputPw}
-        />
-      </div>
-      <br></br>
-      <MyButton text={"로그인"} onClick={onClickLogin} />
-      <MyButton text={"회원가입"} />
     </div>
   );
 };

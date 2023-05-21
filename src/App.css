@@ -391,20 +391,29 @@ header button {
 .login_logo {
   width: 60%;
   height: 60%;
-  padding-top: 50px;
+  padding-top: 150px;
   padding-bottom: 50px;
 }
 
-.id_field{
+.id_field {
   height: 40px;
-  width: 300px;
+  width: 80%;
+  border: none;
+  border-radius: 5px;
+  background-color: #ececec;
 }
 
 .pw_field {
   height: 40px;
-  width: 300px;
+  width: 80%;
+  border: none;
+  border-radius: 5px;
+  background-color: #ececec;
+  cursor: pointer;
 }
 
-.login_button {
-  padding-right: 100px;
+.form_wrapper {
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
 }

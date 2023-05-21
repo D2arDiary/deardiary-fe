@@ -2,6 +2,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { useReducer, useRef, useEffect, useState } from "react";
 
+import axios from "axios";
 import Home from "./pages/Home";
 import Diary from "./pages/Diary";
 import New from "./pages/New";
@@ -9,6 +10,7 @@ import Edit from "./pages/Edit";
 
 import { dummyData } from "./util/dummy";
 import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 
 const reducer = (state, action) => {
   let newState = [];
@@ -35,8 +37,20 @@ const reducer = (state, action) => {
   }
 
   /* DB에 newState 저장하는 것*/
-  localStorage.setItem("diary", JSON.stringify(newState));
-  console.log(JSON.stringify(newState[0]));
+  // localStorage.setItem("diary", JSON.stringify(newState));
+
+  // const info = { userId: sessionStorage.getItem("userId") };
+  // const data = await axios
+  //   .post("http://192.168.0.195:38383/api/getDiary", info)
+  //   .then((response) => {
+  //     console.log(response.data);
+  //     sessionStorage.setItem("localData", JSON.stringify(response.data));
+  //   })
+  //   .catch((error) => {
+  //     console.error(error);
+  //   });
+
+  // console.log(JSON.stringify(newState[0]));
   return newState;
 };
 
@@ -54,19 +68,29 @@ function App() {
       sessionStorage.setItem("isLogin", "false");
       setIsLogin(false);
     }
-  });
-
-  useEffect(() => {
     const titleElement = document.getElementsByTagName("title")[0];
     titleElement.innerHTML = `Dear Diary`;
   }, []);
 
-  useEffect(() => {
-    const localData = localStorage.getItem("diary");
+  useEffect(async () => {
+    // const localData = localStorage.getItem("diary");
+    const info = { username: sessionStorage.getItem("userId") };
+    const data = await axios
+      .post("http://192.168.0.195:38383/api/getDiary", info)
+      .then((response) => {
+        console.log(response.data[0]);
+        sessionStorage.setItem("localData", JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    const localData = sessionStorage.getItem("localData");
     if (localData) {
+      console.log(localData);
       const diaryList = JSON.parse(localData).sort(
         (a, b) => parseInt(b.id) - parseInt(a.id)
       );
+      console.log(diaryList);
       if (diaryList.length >= 1) {
         dataId.current = parseInt(diaryList[0].id) + 1;
         dispatch({ type: "INIT", data: diaryList });
@@ -76,7 +100,7 @@ function App() {
 
   const dataId = useRef(0);
   // CREATE
-  const onCreate = (date, content, emotion) => {
+  const onCreate = async (date, content, emotion) => {
     dispatch({
       type: "CREATE",
       data: {
@@ -124,6 +148,7 @@ function App() {
               <Route path="/new" element={<New />} />
               <Route path="/edit/:id" element={<Edit />} />
               <Route path="/diary/:id" element={<Diary />} />
+              <Route path="/signup" element={<SignUp />} />
             </Routes>
           </div>
         </BrowserRouter>

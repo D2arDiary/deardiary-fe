@@ -54,8 +54,8 @@ const Diary = () => {
 
         <article>
           <section>
-            <h4>오늘의 감정</h4>
-            <div
+            <h4>오늘의 일기</h4>
+            {/* <div
               className={[
                 "diary_img_wrapper",
                 `diary_img_wrapper_${data.emotion}`,
@@ -65,7 +65,7 @@ const Diary = () => {
               <div className="emotion_descript">
                 {curEmotionData.emotion_descript}
               </div>
-            </div>
+            </div>*/}
           </section>
           <div className="diary_content_section">
             <section>
@@ -80,7 +80,7 @@ const Diary = () => {
           <section>
             <div className="diary_empathy_wrapper">
               <div className="diary_content_wrapper_empathy">
-                <p>ㅂㅅ 힘내라</p>
+                <p>{data.message}</p>
               </div>
             </div>
           </section>

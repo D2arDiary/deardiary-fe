@@ -10,8 +10,8 @@ const sortOptionList = [
 
 const filterOptionList = [
   { value: "all", name: "전체" },
-  { value: "good", name: "좋은 감정만" },
-  { value: "bad", name: "나쁜 감정만" },
+  { value: "yes", name: "공감 받음" },
+  { value: "no", name: "공감 없음" },
 ];
 
 const ControlMenu = ({ value, onChange, optionList }) => {
@@ -37,8 +37,9 @@ const DiaryList = ({ diaryList }) => {
 
   const getProcessedDiaryList = () => {
     const filterCallBack = (item) => {
-      if (filter === "good") {
-        return parseInt(item.emotion) <= 3;
+      console.log(item);
+      if (filter === "yes") {
+        return parseInt(item.empathy.length) >= 1;
       } else {
         return parseInt(item.emotion) > 3;
       }
