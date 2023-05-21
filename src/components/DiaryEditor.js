@@ -87,7 +87,7 @@ const DiaryEditor = ({ isEdit, originData }) => {
             />
           </div>
         </section>
-        <section>
+        {/* <section>
           <h4>오늘의 감정</h4>
           <div className="input_box emotion_list_wrapper">
             {emotionList.map((it) => (
@@ -99,7 +99,7 @@ const DiaryEditor = ({ isEdit, originData }) => {
               />
             ))}
           </div>
-        </section>
+        </section> */}
         <section>
           <h4>오늘의 일기</h4>
           <div className="input_box text_wrapper">

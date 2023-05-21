@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import React, { useReducer, useRef, useEffect } from "react";
+import React, { useReducer, useRef, useEffect, useState } from "react";
 
 import Home from "./pages/Home";
 import Diary from "./pages/Diary";
@@ -8,6 +8,7 @@ import New from "./pages/New";
 import Edit from "./pages/Edit";
 
 import { dummyData } from "./util/dummy";
+import Login from "./pages/Login";
 
 const reducer = (state, action) => {
   let newState = [];
@@ -44,6 +45,16 @@ export const DiaryDispatchContext = React.createContext();
 
 function App() {
   const [data, dispatch] = useReducer(reducer, []);
+  const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("isLogin") === "true") {
+      setIsLogin(true);
+    } else {
+      sessionStorage.setItem("isLogin", "false");
+      setIsLogin(false);
+    }
+  });
 
   useEffect(() => {
     const titleElement = document.getElementsByTagName("title")[0];
@@ -109,7 +120,7 @@ function App() {
         <BrowserRouter>
           <div className="App">
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={isLogin ? <Home /> : <Login />} />
               <Route path="/new" element={<New />} />
               <Route path="/edit/:id" element={<Edit />} />
               <Route path="/diary/:id" element={<Diary />} />

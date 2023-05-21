@@ -67,10 +67,21 @@ const Diary = () => {
               </div>
             </div>
           </section>
+          <div className="diary_content_section">
+            <section>
+              <div className="diary_content_wrapper">
+                <div className="diary_content_wrapper_data">
+                  <p>{data.content}</p>
+                </div>
+              </div>
+            </section>
+          </div>
+
           <section>
-            <h4>오늘의 일기</h4>
-            <div className="diary_content_wrapper">
-              <p>{data.content}</p>
+            <div className="diary_empathy_wrapper">
+              <div className="diary_content_wrapper_empathy">
+                <p>ㅂㅅ 힘내라</p>
+              </div>
             </div>
           </section>
         </article>
