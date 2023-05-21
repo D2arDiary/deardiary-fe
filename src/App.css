@@ -382,3 +382,29 @@ header button {
   line-height: 2.5;
   color: white;
 }
+
+/* Login */
+.login_wrapper {
+  text-align: center;
+}
+
+.login_logo {
+  width: 60%;
+  height: 60%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.id_field{
+  height: 40px;
+  width: 300px;
+}
+
+.pw_field {
+  height: 40px;
+  width: 300px;
+}
+
+.login_button {
+  padding-right: 100px;
+}

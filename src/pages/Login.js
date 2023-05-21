@@ -44,20 +44,28 @@ const Login = () => {
       });
   };
   return (
-    <div>
-      <h2>Login</h2>
-      <div>
-        <input type="text" placeholder="ID" onChange={handleInputId} />
-      </div>
-      <h2>Password</h2>
+    <div className="login_wrapper">
+      <img className="login_logo" src="assets/logo.png" />
       <div>
         <input
+          className="id_field"
+          type="text"
+          placeholder="ID"
+          onChange={handleInputId}
+        />
+      </div>
+      <br></br>
+      <div>
+        <input
+          className="pw_field"
           type="password"
           placeholder="Password"
           onChange={handleInputPw}
         />
       </div>
-      <MyButton text={"Login"} onClick={onClickLogin} />
+      <br></br>
+      <MyButton text={"로그인"} onClick={onClickLogin} />
+      <MyButton text={"회원가입"} />
     </div>
   );
 };
