@@ -19,7 +19,7 @@ const SignUp = () => {
   const onClickSignUp = async () => {
     const info = { username: inputId, password: inputPw };
     const data = await axios
-      .post("http://192.168.0.195:38383/api/signup", info)
+      .post(`${process.env.REACT_APP_SERVER_URL}/api/signup`, info)
       .then((response) => {
         // console.log(response.data["signUp"]);
         if (response.data["signUp"] === "success") {

@@ -39,7 +39,7 @@ const Login = () => {
     console.log("info :: ", info);
 
     let status = await axios
-      .post("http://192.168.0.195:38383/api/login", info)
+      .post(`${process.env.REACT_APP_SERVER_URL}/api/login`, info)
       .then((response) => {
         console.log(response.data);
         if (response.data.isLogin == "true") {

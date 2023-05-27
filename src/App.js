@@ -36,21 +36,6 @@ const reducer = (state, action) => {
       return state;
   }
 
-  /* DB에 newState 저장하는 것*/
-  // localStorage.setItem("diary", JSON.stringify(newState));
-
-  // const info = { userId: sessionStorage.getItem("userId") };
-  // const data = await axios
-  //   .post("http://192.168.0.195:38383/api/getDiary", info)
-  //   .then((response) => {
-  //     console.log(response.data);
-  //     sessionStorage.setItem("localData", JSON.stringify(response.data));
-  //   })
-  //   .catch((error) => {
-  //     console.error(error);
-  //   });
-
-  // console.log(JSON.stringify(newState[0]));
   return newState;
 };
 
@@ -76,7 +61,7 @@ function App() {
     // const localData = localStorage.getItem("diary");
     const info = { username: sessionStorage.getItem("userId") };
     const data = await axios
-      .post("http://192.168.0.195:38383/api/getDiary", info)
+      .post(`${process.env.REACT_APP_SERVER_URL}/api/getDiary`, info)
       .then((response) => {
         console.log(response.data[0]);
         sessionStorage.setItem("localData", JSON.stringify(response.data));

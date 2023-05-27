@@ -37,7 +37,7 @@ const DiaryEditor = ({ isEdit, originData }) => {
       };
       console.log(info);
       const createDiary = await axios
-        .post("http://192.168.0.195:38383/api/deleteDiary", info)
+        .post(`${process.env.REACT_APP_SERVER_URL}/api/deleteDiary`, info)
         .then((response) => {
           console.log(response.data);
           // sessionStorage.setItem("localData", JSON.stringify(response.data));
@@ -65,7 +65,7 @@ const DiaryEditor = ({ isEdit, originData }) => {
         onCreate(date, content, emotion);
         const info = { userId: userId, content: content, date: date };
         const createDiary = await axios
-          .post("http://192.168.0.195:38383/api/postDiary", info)
+          .post(`${process.env.REACT_APP_SERVER_URL}/api/postDiary`, info)
           .then((response) => {
             console.log(response.data);
             // sessionStorage.setItem("localData", JSON.stringify(response.data));
@@ -82,7 +82,7 @@ const DiaryEditor = ({ isEdit, originData }) => {
         };
         console.log(info);
         const createDiary = await axios
-          .post("http://192.168.0.195:38383/api/editDiary", info)
+          .post(`${process.env.REACT_APP_SERVER_URL}/api/editDiary`, info)
           .then((response) => {
             console.log(response.data);
             // sessionStorage.setItem("localData", JSON.stringify(response.data));
