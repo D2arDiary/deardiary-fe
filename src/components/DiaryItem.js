@@ -28,7 +28,7 @@ const DiaryItem = ({ id, emotion, content, date }) => {
         ].join(" ")}
       >
         <img
-          src={`https://github.com/D2arDiary/deardiary-fe/tree/main/public/assets/emotion${emotion}.png`}
+          src={process.env.PUBLIC_URL + `assets/emotion${emotion}.png`}
           alt="emotion"
         />
       </div>
