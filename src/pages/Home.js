@@ -66,7 +66,7 @@ const Home = () => {
         // leftChild={<MyButton text={"<"} onClick={decreaseMonth} />}
         rightChild={
           <MyButton
-            type={"negative"}
+            // type={"negative"}
             text={"로그아웃"}
             onClick={handleLogout}
           />
