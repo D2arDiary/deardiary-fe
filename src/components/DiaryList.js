@@ -9,8 +9,8 @@ const sortOptionList = [
 ];
 
 const filterOptionList = [
-  { value: "all", name: "전체" },
-  { value: "yes", name: "공감 받음" },
+  { value: "all", name: "공감 받음" },
+  // { value: "yes", name: "공감 받음" },
   { value: "no", name: "공감 없음" },
 ];
 
