@@ -16,8 +16,15 @@ const SignUp = () => {
     console.log("inputPw :: ", inputPw);
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      onClickSignUp();
+    }
+  };
+
   const onClickSignUp = async () => {
     const info = { username: inputId, password: inputPw };
+    console.log("signup 요청");
     const data = await axios
       .post(`${process.env.REACT_APP_SERVER_URL}/api/signup`, info)
       .then((response) => {
@@ -54,6 +61,7 @@ const SignUp = () => {
             type="password"
             placeholder="    Password"
             onChange={handleInputPw}
+            onKeyPress={handleKeyPress}
           />
         </div>
       </section>

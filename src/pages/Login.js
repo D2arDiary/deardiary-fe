@@ -23,6 +23,12 @@ const Login = () => {
     console.log("inputPw :: ", inputPw);
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      onClickLogin();
+    }
+  };
+
   const onClickSignUp = () => {
     navigate("/signup");
   };
@@ -77,6 +83,7 @@ const Login = () => {
             type="password"
             placeholder="    Password"
             onChange={handleInputPw}
+            onKeyPress={handleKeyPress}
           />
         </div>
       </section>
